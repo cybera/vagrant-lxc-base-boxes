@@ -52,6 +52,7 @@ else
 fi
 if [ ${DISTRIBUTION} = 'fedora' ] ||\
    [ ${DISTRIBUTION} = 'ubuntu' -a ${RELEASE} = 'wily' ] ||\
+   [ ${DISTRIBUTION} = 'ubuntu' -a ${RELEASE} = 'xenial' ] ||\
    [ ${DISTRIBUTION} = 'debian' -a ${RELEASE} = 'jessie' ] ||\
    [ ${DISTRIBUTION} = 'debian' -a ${RELEASE} = 'stretch' ]
 then
@@ -65,6 +66,7 @@ then
   echo "# settings for systemd with PID 1:" >> /var/lib/lxc/${CONTAINER}/config
   echo "lxc.kmsg = 0" >> /var/lib/lxc/${CONTAINER}/config
   echo "lxc.autodev = 1" >> /var/lib/lxc/${CONTAINER}/config
+  echo "lxc.network.ipv4=192.168.85.9/24" >> /var/lib/lxc/${CONTAINER}/config
   utils.lxc.start
   utils.lxc.attach rm -f /dev/kmsg
   utils.lxc.stop
